@@ -1,1 +1,11 @@
-theme: jekyll-theme-dinky
+# Setup
+name:         Renbobo's Blog
+tagline:      A responsive theme for your project on GitHub Pages
+baseurl:      ""
+
+# Gems
+gems:
+  - jekyll-paginate
+
+#Others
+markdown: kramdown
