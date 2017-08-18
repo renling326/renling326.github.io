@@ -5,3 +5,83 @@ date:   2017-08-06 15:40:56
 categories: jekyll update
 ---
 
+### 同步
+
+1. 阻塞
+
+同步阻塞IO模型是最简单的IO模型，用户线程在内核进行IO操作时被阻塞。
+
+![][image-1]image1
+
+如图1所示，用户线程通过系统调用read发起IO读操作，由用户空间转到内核空间。内核等到数据包到达后，然后将接收的数据拷贝到用户空间，完成read操作。
+用户线程使用同步阻塞IO模型的伪代码描述为：
+
+{% highlight ruby %}
+{
+  read(socket,buffer);
+  process(buffer);
+}
+{% endhighlight %}
+
+即用户需要等待read将socket中的数据读取到buffer后，才继续处理接收的数据。整个IO请求的过程中，用户线程是被阻塞的，这导致用户在发起IO请求时，不能做任何事情，对CPU的资源利用率不够
+
+2. 非阻塞
+
+同步非阻塞IO是在同步阻塞IO的基础上，将socket设置为NONBLOCK。这样做用户线程可以在发起IO请求后可以立即返回
+
+![]()image2
+
+如图2所示，由于socket是 _非阻塞_  的方式，因此用户线程发起IO请求时立即返回。但并未读取到任何数据，用户线程需要不断地发起IO请求，直到数据到达后，才真正读取到数据，继续执行
+用户线程使用同步非阻塞IO模型的伪代码描述为：
+
+{% highlight ruby %}
+{
+  while(read(socket,buffer) != SUCCESS){}
+  process(buffer);
+}
+{% endhighlight %}
+
+3. IO多路复用
+
+IO多路复用模型是建立在内核提供的多路分离函数select基础之上的，使用select函数可以避免同步非阻塞IO模型中轮询等待的问题。
+
+![]()image3
+
+如图3所示，用户首先将需要进行IO操作的socket添加到select中，然后阻塞等待select系统调用返回。当数据到达时，socket被激活，select函数返回。用户线程正式发起read请求，读取数据并继续执行。
+从流程上来看，使用select函数进行IO请求和同步阻塞模型没有太大的区别，甚至还多了添加监视socket，以及调用select函数的额外操作，效率更差。但是，\_\_使用select以后最大的优势是用户可以在一个线程内同时处理多个socket的IO请求\_\_。用户可以注册多个socket，然后不断地调用select读取被激活的socket，即可达到在同一个线程内同时处理多个IO请求的目的。而在同步阻塞模型中，必须通过多线程的方式才能达到这个目的。
+用户线程使用select函数的伪代码描述为：
+
+	{
+	  select(socket);
+	  while(1){
+	    sockets = select();
+	    for(socket in sockets){
+	      if(can_read(socket)){
+	        read(socket,buffer);
+	        process(buffer);
+	      }
+	    }
+	  }
+	}
+{% highlight ruby %}
+{
+ select(socket);
+ while(1){
+  sockets = select();
+  for(socket in sockets){
+   if(can_read(socket)){
+read(socket,buffer);
+process(buffer);
+   }
+  }
+ }
+}
+{% endhighlight %}
+
+其中while循环前将socket添加到select监视中，然后在while内一直调用select获取被激活的socket，一旦socket可读，便调用read函数将socket中的数据读取出来。
+然而，使用select函数的优点并不仅限于此。虽然上述方式允许单线程内处理多个IO请求，但是每个IO请求的过程还是阻塞的（在select函数上阻塞），平均时间甚至比同步阻塞IO模型还要长。如果用户线程只注册自己感兴趣的socket或者IO请求，然后去做自己的事情，等到数据到来时再进行处理，则可以提高CPU的利用率。
+### 异步
+
+
+
+[image-1]:	~/Document/%E7%A4%BA%E4%BE%8B%E5%9B%BE%E7%89%871.jpeg
