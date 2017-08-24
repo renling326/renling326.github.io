@@ -8,7 +8,7 @@ categories: jekyll update
 **在不改变原有实现的基础上，实现功能的扩展。并且可以多次叠加扩展。**
 **被装饰者始终不变。装饰者在设定了要装饰对象以后也变成了一个被装饰者。**
 
-![]({{"images/Decorator.jpg" | prepend:site.baseurl}})
+![]({{ site.url }}/images/Decorator.jpg)
 
 实例：咖啡店
 咖啡店有多种咖啡，每种有对应的价格。
@@ -88,11 +88,11 @@ public:
 Flavourobject();
 Flavourobject();
 
-virtual void setComponent(BaseObject* obj);
+virtual void setComponent(BaseObject\* obj);
 virtual float cost();
 
 protected:
-BaseObject* obj;
+BaseObject\* obj;
 };
 {% endhighlight %}
 flavourobject.cc
@@ -111,7 +111,7 @@ float Flavourobject::cost(){
 return this-\>value + this-\>obj-\>cost();
 }
 
-void Flavourobject::setComponent(BaseObject* obj){
+void Flavourobject::setComponent(BaseObject\* obj){
 this-\>obj = obj;
 }
 {% endhighlight %}
@@ -167,12 +167,12 @@ main.cc
 using namespace std;
 
 int main() {
-BaseObject* obj = new Americano();
-Flavourobject* flavour = new Milk();
+BaseObject\* obj = new Americano();
+Flavourobject\* flavour = new Milk();
 flavour-\>setComponent(obj);
 cout \<\< "total:" \<\< flavour-\>cost() \<\< endl;
-Flavourobject* flavour1 = new Suger();
-flavour1-\>setComponent(dynamic_cast\<BaseObject*\>(flavour));
+Flavourobject\* flavour1 = new Suger();
+flavour1-\>setComponent(dynamic\_cast\<BaseObject\*\>(flavour));
 cout \<\< "total1:" \<\< flavour1-\>cost() \<\< endl;
 std::cout \<\< "Hello, World!" \<\< std::endl;
 return 0;
@@ -181,3 +181,4 @@ return 0;
 {% endhighlight %}
 
 
+[1]:	images/Decorator.jpg
