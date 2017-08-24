@@ -7,7 +7,7 @@ categories: jekyll update
 ## 装饰模式
 **在不改变原有实现的基础上，实现功能的扩展。并且可以多次叠加扩展。**
 **被装饰者始终不变。装饰者在设定了要装饰对象以后也变成了一个被装饰者。**
-![][image-1]
+![](images/Decorator.jpg)
 
 实例：咖啡店
 咖啡店有多种咖啡，每种有对应的价格。
@@ -180,4 +180,3 @@ return 0;
 {% endhighlight %}
 
 
-[image-1]:	../images/body-bg.jpg
