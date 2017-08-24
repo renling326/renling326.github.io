@@ -14,6 +14,9 @@ categories: jekyll update
 咖啡店有多种咖啡，每种有对应的价格。
 咖啡可以任意添加调味，比如，牛奶，糖，豆浆…
 要计算 加一份牛奶，两份糖的拿铁咖啡的价格。
+类图：
+
+![]({{ site.url }}/images/Decorator_coffee.png)
 
 baseobject.h
 {% highlight ruby %}
