@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "design-module"
-date:   2014-08-07 15:40:56
+title:  "设计模式"
+date:   2017-08-22 15:40:56
 categories: jekyll update
 ---
 ## 策略模式

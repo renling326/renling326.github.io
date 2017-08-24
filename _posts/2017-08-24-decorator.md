@@ -1,10 +1,9 @@
 ---
 layout: post
-title:  "decorator-module"
-date:   2014-08-24 15:40:56
+title:  "装饰模式"
+date:   2017-08-23 15:40:56
 categories: jekyll update
 ---
-## 装饰模式
 **在不改变原有实现的基础上，实现功能的扩展。并且可以多次叠加扩展。**
 **被装饰者始终不变。装饰者在设定了要装饰对象以后也变成了一个被装饰者。**
 
@@ -184,4 +183,3 @@ return 0;
 {% endhighlight %}
 
 
-[1]:	images/Decorator.jpg
