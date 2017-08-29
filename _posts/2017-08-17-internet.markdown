@@ -6,6 +6,7 @@ categories: jekyll update
 ---
 
 io 主要非为 同步阻塞 同步非阻塞 io多路复用 异步 四种方式
+excerpt_separator
 ### 同步
 
 1. 阻塞
