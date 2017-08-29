@@ -5,8 +5,8 @@ date:   2017-08-06 15:40:56
 categories: jekyll update
 ---
 ruby初学者教程
-excerpt_separator
-# 搜索系统
+
+搜索系统
 
 ## 下载系统
 
