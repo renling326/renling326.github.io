@@ -25,14 +25,14 @@ using namespace std;
 
 class BaseObject{
 public:
-BaseObject();
-virtual BaseObject();
-virtual float cost();
-void display();
+    BaseObject();
+    virtual BaseObject();
+    virtual float cost();
+    void display();
 
 protected:
-float value;
-string name;
+    float value;
+    string name;
 };
 {% endhighlight %}
 baseobject.cc
@@ -40,7 +40,7 @@ baseobject.cc
 #include "baseobject.h"
 
 BaseObject::BaseObject(){
-this->value = 0;
+    this->value = 0;
 }
 
 BaseObject::BaseObject(){
@@ -48,11 +48,11 @@ BaseObject::BaseObject(){
 }
 
 float BaseObject::cost(){
-return value;
+    return value;
 }
 
 void BaseObject::display(){
-cout << this->name << " : " << this->value << endl;
+    cout << this->name << " : " << this->value << endl;
 }
 {% endhighlight %}
 americano.h
@@ -63,20 +63,20 @@ using namespace std;
 
 class Americano : public BaseObject{
 public:
-Americano();
-Americano();
+    Americano();
+    Americano();
 };
 {% endhighlight %}
 americano.cc
 {% highlight ruby %}
 #include "americano.h"
 Americano::Americano(){
-value = 12.5;
-name = "Americano";
-display();
+    value = 12.5;
+    name = "Americano";
+    display();
 }
 Americano::Americano(){
-cout << "delete Americano" <<endl;
+    cout << "delete Americano" <<endl;
 }
 {% endhighlight %}
 flavourobject.h
@@ -87,14 +87,14 @@ using namespace std;
 
 class Flavourobject : public BaseObject{
 public:
-Flavourobject();
-Flavourobject();
-
-virtual void setComponent(BaseObject * obj);
-virtual float cost();
+    Flavourobject();
+    Flavourobject();
+    
+    virtual void setComponent(BaseObject * obj);
+    virtual float cost();
 
 protected:
-BaseObject * obj;
+    BaseObject * obj;
 };
 {% endhighlight %}
 flavourobject.cc
@@ -102,7 +102,7 @@ flavourobject.cc
 #include "flavourobject.h"
 
 Flavourobject::Flavourobject(){
-value = 3;
+    value = 3;
 }
 
 Flavourobject::Flavourobject(){
@@ -110,11 +110,11 @@ Flavourobject::Flavourobject(){
 }
 
 float Flavourobject::cost(){
-return this->value + this->obj->cost();
+    return this->value + this->obj->cost();
 }
 
 void Flavourobject::setComponent(BaseObject * obj){
-this->obj = obj;
+    this->obj = obj;
 }
 {% endhighlight %}
 milk.h
@@ -126,8 +126,8 @@ using namespace std;
 
 class Milk : public Flavourobject{
 public:
-Milk();
-Milk();
+    Milk();
+    Milk();
 };
 {% endhighlight %}
 milk.cc
@@ -135,9 +135,9 @@ milk.cc
 #include "milk.h"
 
 Milk::Milk(){
-value = 3;
-name = "Milk";
-display();
+    value = 3;
+    name = "Milk";
+    display();
 }
 
 Milk::Milk(){
@@ -153,8 +153,8 @@ using namespace std;
 
 class Suger : public Flavourobject{
 public:
-Suger();
-Suger();
+    Suger();
+    Suger();
 };
 
 {% endhighlight %}
@@ -169,15 +169,15 @@ main.cc
 using namespace std;
 
 int main() {
-BaseObject * obj = new Americano();
-Flavourobject * flavour = new Milk();
-flavour->setComponent(obj);
-cout << "total:" << flavour->cost() << endl;
-Flavourobject * flavour1 = new Suger();
-flavour1->setComponent(dynamic_cast<BaseObject*>(flavour));
-cout << "total1:" << flavour1->cost() << endl;
-std::cout << "Hello, World!" << std::endl;
-return 0;
+    BaseObject * obj = new Americano();
+    Flavourobject * flavour = new Milk();
+    flavour->setComponent(obj);
+    cout << "total:" << flavour->cost() << endl;
+    Flavourobject * flavour1 = new Suger();
+    flavour1->setComponent(dynamic_cast<BaseObject*>(flavour));
+    cout << "total1:" << flavour1->cost() << endl;
+    std::cout << "Hello, World!" << std::endl;
+    return 0;
 }
 
 {% endhighlight %}
