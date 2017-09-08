@@ -30,3 +30,7 @@ categories: jekyll update
 改进2:
 可以利用\_\_设定方法\_\_来设定鸭子的行为。而不是在鸭子的构造器内实例化。
 
+策略模式类图:
+
+![]({{ site.url }}/images/策略模式.png)
+
