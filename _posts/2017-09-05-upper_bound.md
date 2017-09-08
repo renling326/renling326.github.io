@@ -20,9 +20,9 @@ upper_bound()与lower_bound()使用方法
 using namespace std;
 int main(){
   int point[10]() = {1,3,7,7,9};
-  int tmp = upper\_bound(point, point + 5, 7) - point; //按从小到大，7最多能插入数组point的哪个位置 
+  int tmp = upper_bound(point, point + 5, 7) - point; //按从小到大，7最多能插入数组point的哪个位置 
   printf("%d\n",tmp);
-  tmp = lower\_bound(point, point + 5, 7) - point; //按从小到大，7最少能插入数组point的哪个位置
+  tmp = lower_bound(point, point + 5, 7) - point; //按从小到大，7最少能插入数组point的哪个位置
   printf("%d\n",tmp);
   return 0;
 }
@@ -31,5 +31,6 @@ int main(){
 output:
 
 4
+
 2
 
