@@ -40,6 +40,14 @@
               <li> <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
             {% endfor %}
 	  </ul>
+	  <ul class="sideBarTags">
+	    <h2>Tags</h2>
+              {% for tag in site.tags %}
+                 
+		<li> <a href="{{ site.baseurl }}{{ post.url }}"> {{ tag[0] }}</a> </li>
+
+              {% endfor %}
+	  </ul>
           <ul class="sideBarTags">
 	    <h2>Download</h2>
             <a href="https://github.com/renling326/renling326.github.io/archive/master.zip" class="button">
